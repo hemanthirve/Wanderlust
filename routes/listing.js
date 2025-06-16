@@ -30,4 +30,4 @@ router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(listingController.renderE
 
 
 
-module.exports = router;
+module.exports = router; 
