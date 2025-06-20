@@ -25,7 +25,34 @@ const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
 // const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+// const dbUrl = process.env.ATLASDB_URL;
+
+
+
+
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+
+// Assuming you already have this somewhere:
 const dbUrl = process.env.ATLASDB_URL;
+
+app.use(session({
+  secret: 'thisshouldbeabettersecret!',
+  resave: false,
+  saveUninitialized: true,
+  store: MongoStore.create({
+    mongoUrl: dbUrl,  // use your dbUrl variable
+    ttl: 14 * 24 * 60 * 60  // 14 days
+  })
+}));
+
+
+
+
+
+
+
+
 
 main().then(()=> {
     console.log("connected to DB");
