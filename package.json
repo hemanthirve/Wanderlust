@@ -1,12 +1,12 @@
 {
-  "engine": {
-    "node": "22.15.1"
+  "engines": {
+    "node": "18.17.0"
   },
-  "name": "wonderlust",
+  "name": "wanderlust",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
