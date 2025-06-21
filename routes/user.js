@@ -13,8 +13,10 @@ router.route("/signup")
 router.route("/login")
 .get( userController.renderLoginForm)
 .post( saveRedirectUrl, passport.authenticate("local", { failureRedirect: "/login", failureFlash: true}) , userController.login)
-.get( userController.logout);
+// .get( userController.logout);
 
+router.route("/logout") 
+.get(userController.logout);
 
 
 module.exports = router;
