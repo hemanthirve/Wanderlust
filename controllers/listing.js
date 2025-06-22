@@ -46,6 +46,7 @@ module.exports.showListing = async(req,res) => {
 // }
 
 module.exports.createListing = async (req, res, next) => {
+     console.log("🚀 CREATE LISTING ROUTE HIT");
     try {
         console.log("✅ Entered createListing handler");
         console.log("📥 req.body:", req.body);
