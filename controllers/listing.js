@@ -44,6 +44,7 @@ module.exports.showListing = async(req,res) => {
 //     }
 
 // }
+
 module.exports.createListing = async (req, res, next) => {
     try {
         const newListing = new Listing(req.body.listing);
@@ -56,15 +57,22 @@ module.exports.createListing = async (req, res, next) => {
             };
         }
 
+        console.log("📦 New listing data before save:", newListing);
+        console.log("📸 Uploaded file info:", req.file);
+
         await newListing.save();
         req.flash("success", "New Listing Created!");
-        res.redirect(`/listings/${newListing._id}`);
+        return res.redirect(`/listings/${newListing._id}`);
     } catch (err) {
-        console.error("Error creating listing:", err);
-        req.flash("error", `Failed to create listing: ${err.message}`);
-        res.redirect("/listings/new");
+        console.error("❌ Error creating listing:", err.stack || err);
+        console.error("❗ Body:", req.body);
+        console.error("❗ File:", req.file);
+        req.flash("error", `Failed to create listing: ${err.message || 'Unknown error'}`);
+        return res.redirect("/listings/new");
     }
 };
+
+
 
 
 module.exports.renderEditForm = async (req,res)=> {
