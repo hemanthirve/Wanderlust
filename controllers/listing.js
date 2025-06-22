@@ -47,6 +47,10 @@ module.exports.showListing = async(req,res) => {
 
 module.exports.createListing = async (req, res, next) => {
     try {
+        console.log("✅ Entered createListing handler");
+        console.log("📥 req.body:", req.body);
+        console.log("📸 req.file:", req.file);
+
         const newListing = new Listing(req.body.listing);
         newListing.owner = req.user._id;
 
@@ -57,20 +61,19 @@ module.exports.createListing = async (req, res, next) => {
             };
         }
 
-        console.log("📦 New listing data before save:", newListing);
-        console.log("📸 Uploaded file info:", req.file);
+        console.log("📦 New listing before save:", newListing);
 
         await newListing.save();
+
         req.flash("success", "New Listing Created!");
         return res.redirect(`/listings/${newListing._id}`);
     } catch (err) {
         console.error("❌ Error creating listing:", err.stack || err);
-        console.error("❗ Body:", req.body);
-        console.error("❗ File:", req.file);
         req.flash("error", `Failed to create listing: ${err.message || 'Unknown error'}`);
         return res.redirect("/listings/new");
     }
 };
+
 
 
 
