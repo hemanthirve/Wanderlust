@@ -27,55 +27,23 @@ module.exports.showListing = async(req,res) => {
     res.render("listings/show.ejs", {listing});
 }
 
-// module.exports.createListing = async (req,res, next) =>{
-//     try {
-//         let url = req.file.path;
-//         let filename = req.file.filename;
-//         const newListing = new Listing(req.body.listing);
-//         newListing.owner = req.user._id;
-//         newListing.image = {url, filename};
-//         await newListing.save();
-//         req.flash("success", "New Listing Created!");
-//         res.redirect("/listings");
-//     } catch (err) {
-//         console.error("Error creating listing:", err);
-//         req.flash('error', 'Failed to create listing. Please try again.');
-//         res.redirect('/listings');
-//     }
-
-// }
-
-module.exports.createListing = async (req, res, next) => {
-     console.log("🚀 CREATE LISTING ROUTE HIT");
+module.exports.createListing = async (req,res, next) =>{
     try {
-        console.log("✅ Entered createListing handler");
-        console.log("📥 req.body:", req.body);
-        console.log("📸 req.file:", req.file);
-
+        let url = req.file.path;
+        let filename = req.file.filename;
         const newListing = new Listing(req.body.listing);
         newListing.owner = req.user._id;
-
-        if (req.file) {
-            newListing.image = {
-                url: req.file.path,
-                filename: req.file.filename
-            };
-        }
-
-        console.log("📦 New listing before save:", newListing);
-
+        newListing.image = {url, filename};
         await newListing.save();
-
         req.flash("success", "New Listing Created!");
-        return res.redirect(`/listings/${newListing._id}`);
+        res.redirect("/listings");
     } catch (err) {
-        console.error("❌ Error creating listing:", err.stack || err);
-        req.flash("error", `Failed to create listing: ${err.message || 'Unknown error'}`);
-        return res.redirect("/listings/new");
+        console.error("Error creating listing:", err);
+        req.flash('error', 'Failed to create listing. Please try again.');
+        res.redirect('/listings');
     }
-};
 
-
+}
 
 
 
