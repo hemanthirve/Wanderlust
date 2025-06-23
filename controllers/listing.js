@@ -45,6 +45,7 @@ module.exports.createListing = async (req,res, next) =>{
         console.error("Error creating listing:", err);
         req.flash('error', 'Failed to create listing. Please try again.');
         res.redirect('/listings');
+        console.log("Listing created")
     
 
 }
@@ -61,7 +62,7 @@ module.exports.renderEditForm = async (req,res)=> {
     let originalImageUrl = listing.image.url;
     originalImageUrl = originalImageUrl.replace("/upload", "/upload/w_250");
     res.render("listings/edit.ejs", { listing, originalImageUrl: listing.image});
-    console.log("listing edited");
+    console.log("listing edited");  
 }
 
 module.exports.undateListing = async(req, res)=> {
