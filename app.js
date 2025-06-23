@@ -5,7 +5,7 @@ if(process.env.NODE_ENV != "production") {
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const PORT = 3000;
+
 
 const path = require("path");
 const methodOverride = require("method-override");
@@ -92,7 +92,8 @@ app.use((err, req, res, next) => {
     //res.status(statusCode).send(message);
     res.status(statusCode).render("error.ejs", { message });
 });
-app.listen(process.env.PORT || 3000,()=> {
+const PORT =process.env.PORT || 3000;
+app.listen(PORT, ()=> {
     console.log(`Server is running on port ${PORT}`);
 })
 
