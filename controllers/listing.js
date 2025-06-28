@@ -31,28 +31,27 @@ module.exports.showListing = async (req, res) => {
 
 module.exports.createListing = async (req, res, next) => {
   try {
-    console.log("Creatiiiiing listingggg")
-    let url = req.file.path;
-    let filename = req.file.filename;
+    console.log("Creatiiiiing listingggg");
+
+    let url = req.file?.path;
+    let filename = req.file?.filename;
 
     const newListing = new Listing(req.body.listing);
 
     newListing.owner = req.user._id;
     newListing.image = { url, filename };
 
-    const savedListing = await newListing.save();
-    await Listing.findById(savedListing._id).populate("owner");
+    await newListing.save();
 
     req.flash("success", "New Listing Created!");
     res.redirect("/listings");
-    console.log("Live listing created");
   } catch (err) {
     console.error("Error creating listing:", err);
     req.flash("error", "Failed to create listing. Please try again.");
     res.redirect("/listings");
-    console.log("Listing not created");
   }
 };
+
 
 
 
