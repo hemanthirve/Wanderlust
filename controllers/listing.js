@@ -54,35 +54,6 @@ module.exports.createListing = async (req, res, next) => {
 
 
 
-
-
-
-
-// module.exports.createListing = async (req, res, next) => {
-//   try {
-//     let url = req.file.path;
-//     let filename = req.file.filename;
-
-//     const newListing = new Listing(req.body.listing);
-
-//     newListing.owner = req.user._id;
-//     newListing.image = { url, filename };
-
-//     const savedListing = await newListing.save();
-//     const populatedListing = await Listing.findById(savedListing._id).populate(
-//       "owner"
-//     );
-//     // await newListing.save();
-//     req.flash("success", "New Listing Created!");
-//     res.redirect("/listings");
-//   } catch {
-//     console.error("Error creating listing:", err);
-//     req.flash("error", "Failed to create listing. Please try again.");
-//     res.redirect("/listings");
-//     console.log("Listing created");
-//   }
-// };
-
 module.exports.renderEditForm = async (req, res) => {
   let { id } = req.params;
   const listing = await Listing.findById(id);
