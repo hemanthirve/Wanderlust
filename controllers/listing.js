@@ -7,6 +7,7 @@ module.exports.index = async (req, res) => {
 };
 
 module.exports.renderNewFrom = (req, res) => {
+  console.log("render form.....")
   res.render("listings/new.ejs");
 };
 
